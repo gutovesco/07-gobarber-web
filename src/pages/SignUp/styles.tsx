@@ -38,7 +38,7 @@ max-width: 700px;
     }
 
     > a{
-        color: #ff9000;
+        color: #f4ede8;
         display: block;
         margin-top: 24px;
         text-decoration: none;
@@ -50,7 +50,7 @@ max-width: 700px;
             margin-right: 16px;
 
             &:hover{
-                color: ${shade(0.2, '#f43d38')}
+                color: ${shade(0.2, '#f4ede8')}
             }
         }
     }
