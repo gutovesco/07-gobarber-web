@@ -37,10 +37,13 @@ const Input: React.FC<InputProps> = ({name, icon: Icon, ...rest}) => {
             path: 'value'
         })
     }, [fieldName, registerField])
+
     return (
     <Container isFiled={isFiled} isFocused={isFocused}>
         { Icon && <Icon size={20}/>}
         <input onFocus={handleInputFocus} onBlur={handleInputBlur} ref={inputRef} {...rest}></input>
+
+        {error}
     </Container>
     )
 }
