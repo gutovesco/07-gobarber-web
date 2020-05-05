@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import getValidationErrors from '../../utils/getValidationErrors'
 import {useAuth} from '../../hooks/AuthContext'
 import {useToast} from '../../hooks/Toast'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 interface SignInFormData{
     email: string;
@@ -22,6 +22,7 @@ const SignIn: React.FC = () => {
 
     const {user, signIn} = useAuth();
     const {addToast} = useToast();
+    const history = useHistory()
 
     console.log(user)
 
@@ -37,10 +38,12 @@ const SignIn: React.FC = () => {
                 abortEarly: false,
             })
 
-            signIn({
+            await signIn({
                 email: data.email,
                 password: data.password
             })
+
+            history.push('/dashboard')
         
         }catch(err){
             if(err instanceof Yup.ValidationError){
@@ -55,7 +58,7 @@ const SignIn: React.FC = () => {
                 description: 'Ocorreu um erro ao fazer login, verifique as credenciais'
             });
         }
-    }, [signIn, addToast])
+    }, [signIn, addToast, history])
     
     return(
     <>
