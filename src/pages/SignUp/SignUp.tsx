@@ -1,6 +1,6 @@
 import React, {useCallback, useRef} from 'react';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimationContainer } from './styles';
 import LogoImg from '../../assets/logo.svg'
 //import signUpBackground from '../../assets/sign-up-background.png'
 import Input from '../../components/Input/Input'
@@ -10,9 +10,13 @@ import {Form} from '@unform/web'
 import * as Yup from 'yup'
 import {FormHandles} from '@unform/core'
 import getValidationErrors from '../../utils/getValidationErrors'
+import {Link} from 'react-router-dom'
+import {useToast} from '../../hooks/Toast'
 
 const SignUp: React.FC = () => {
     const formRef = useRef<FormHandles>(null)
+
+    const {addToast} = useToast();
 
     const handleSubmit = useCallback(async (data: object) => {
         try{
@@ -31,14 +35,20 @@ const SignUp: React.FC = () => {
             const errors = getValidationErrors(err)
 
             formRef.current?.setErrors(errors)
-            console.log(err)
+            
+            addToast({
+                type: 'info',
+                title: 'Erro na autenticação',
+                description: 'Ocorreu um erro ao fazer login, verifique as credenciais'
+            });
         }
-    }, [])
+    }, [addToast])
     
     return (
         <Container>
         <Background></Background>
             <Content>
+            <AnimationContainer>
                 <img style={{paddingTop: 200}} src={LogoImg} alt="logo"></img>
 
                 <Form ref={formRef} onSubmit={handleSubmit}>
@@ -49,7 +59,8 @@ const SignUp: React.FC = () => {
                     <Button type="submit">Cadastrar</Button>
                 </Form>
 
-                <a href="login"><FiArrowLeft/>Voltar para logon</a>
+                <Link to="/"><FiArrowLeft/>Voltar para logon</Link>
+                </AnimationContainer>
             </Content>
         </Container>
     )
