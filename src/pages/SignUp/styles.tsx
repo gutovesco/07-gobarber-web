@@ -5,14 +5,14 @@ import signUpBackground from '../../assets/sign-up-background.png'
 export const Container = styled.div`
 height: 100vh;
 display: flex;
-align-items: stretch;
 `;
 
 export const Content = styled.div`
 display: flex;
 flex-direction: column;
-place-content: center;
 align-items: center;
+justify-content: center;
+
 width: 100%;
 max-width: 700px;
 `;
@@ -31,13 +31,14 @@ to {
 export const AnimationContainer = styled.div`
 display: flex;
 flex-direction: column;
-place-content: center;
 align-items: center;
+justify-content: center;
 
 animation: ${appearFromRight} 1s;
 
 form{
-        margin: 80px;
+        margin-top: 40px;
+        margin-bottom: 20px;
         width: 340px;
         text-align: center;
 
@@ -66,6 +67,10 @@ form{
         transition: color 0.2s;
         display: flex;
         align-items: center;
+
+        &:hover{
+            color: ${shade(0.2, '#f43d38')}
+            }
 
         svg{
             margin-right: 16px;

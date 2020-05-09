@@ -66,7 +66,7 @@ animation: ${appearFromLeft} 1s;
         transition: color 0.2s;
 
         &:hover{
-                color: ${shade(0.2, '#f43d38')}
+            color: ${shade(0.2, '#f4ede8')}
             }
 
         svg{
