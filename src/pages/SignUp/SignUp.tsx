@@ -66,7 +66,7 @@ const SignUp: React.FC = () => {
         <Background></Background>
             <Content>
             <AnimationContainer>
-                <img style={{paddingTop: 50}} src={LogoImg} alt="logo"></img>
+                <img style={{paddingTop: 200}} src={LogoImg} alt="logo"></img>
 
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <h1>Faça seu Cadastro</h1>
