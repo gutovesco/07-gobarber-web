@@ -1,13 +1,22 @@
-import React from 'react';
-import {Container, Header, HeaderContent, Profile} from './styles'
+import React, { useState, useCallback } from 'react';
+import { Container, Header, HeaderContent, Profile, Content, NextAppointment, Appointment, Section, Calendar, Schedule } from './styles'
 import logoImg from '../../assets/logo.svg'
-import { FiPower } from 'react-icons/fi';
+import { FiPower, FiClock } from 'react-icons/fi';
 import { useAuth } from '../../hooks/AuthContext';
+import DayPicker, {DayModifiers} from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 const Dashboard: React.FC = () => {
-    const {signOut, user} = useAuth()
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const { signOut, user } = useAuth()
 
-    return(
+    const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
+       if(modifiers.available){
+        setSelectedDate(day)
+       }
+    }, [])
+
+    return (
         <Container>
             <Header>
                 <HeaderContent>
@@ -21,10 +30,111 @@ const Dashboard: React.FC = () => {
                         </div>
                     </Profile>
                     <button type="button" onClick={signOut}>
-                        <FiPower/>
+                        <FiPower />
                     </button>
                 </HeaderContent>
             </Header>
+
+            <Content>
+                <Schedule>
+                    <h1>Horários Agendados</h1>
+                    <p>
+                        <span>Hoje</span>
+                        <span>Dia 06</span>
+                        <span>Segunda-feira</span>
+                    </p>
+
+                    <NextAppointment>
+                        <strong>Atendimento a seguir</strong>
+                        <div>
+                            <img src={user.avatar_url} alt="imagem"></img>
+                            <strong>Diego Fernandes</strong>
+                            <span>
+                                <FiClock />
+                                08:00
+                            </span>
+                        </div>
+                    </NextAppointment>
+
+                    <Section>
+                        <strong>Manhã</strong>
+
+                        <Appointment>
+                            <span>
+                                <FiClock />
+                                08:00
+                            </span>
+                            <div>
+                                <img src={user.avatar_url} alt="imagem"></img>
+                                <strong>Diego Fernandes</strong>
+                            </div>
+                        </Appointment>
+
+                        <Appointment>
+                            <span>
+                                <FiClock />
+                                08:00
+                            </span>
+                            <div>
+                                <img src={user.avatar_url} alt="imagem"></img>
+                                <strong>Diego Fernandes</strong>
+                            </div>
+                        </Appointment>
+                    </Section>
+
+                    <Section>
+                        <strong>Tarde</strong>
+
+                        <Appointment>
+                            <span>
+                                <FiClock />
+                                08:00
+                            </span>
+                            <div>
+                                <img src={user.avatar_url} alt="imagem"></img>
+                                <strong>Diego Fernandes</strong>
+                            </div>
+                        </Appointment>
+                    </Section>
+
+                    <Section>
+                        <strong>Noite</strong>
+
+                        <Appointment>
+                            <span>
+                                <FiClock />
+                                08:00
+                            </span>
+                            <div>
+                                <img src={user.avatar_url} alt="imagem"></img>
+                                <strong>Diego Fernandes</strong>
+                            </div>
+                        </Appointment>
+                    </Section>
+
+                </Schedule>
+                <Calendar>
+                    <DayPicker weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+                    fromMonth={new Date()}
+                    disabledDays={[{daysOfWeek: [0, 6]}]}
+                    modifiers={{available: {daysOfWeek: [1,2,3,4,5]}}}
+                    onDayClick={handleDateChange}
+                    selectedDays={selectedDate}
+                    months={['Janeiro',
+                    'Fevereiro',
+                    'Março',
+                    'Abril',
+                    'Maio>',
+                    'Junho',
+                    'Julho',
+                    'Agosto',
+                    'Setembro',
+                    'Outubro',
+                    'Novembro',
+                    'Dezembro',
+                    ]}/>
+                </Calendar>
+            </Content>
         </Container>
     )
 }
