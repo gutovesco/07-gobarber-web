@@ -8,7 +8,6 @@ import {FiLogIn, FiLock} from 'react-icons/fi'
 import {FormHandles} from '@unform/core'
 import * as Yup from 'yup'
 import getValidationErrors from '../../utils/getValidationErrors'
-import {useAuth} from '../../hooks/AuthContext'
 import {useToast} from '../../hooks/Toast'
 import {Link, useHistory, useLocation} from 'react-router-dom'
 import api from '../../services/api';
@@ -21,7 +20,6 @@ interface ResetPasswordFormData{
 const ResetPassword: React.FC = () => {
     const formRef = useRef<FormHandles>(null)
 
-    const {user} = useAuth();
     const {addToast} = useToast();
     const history = useHistory()
     const location = useLocation()
