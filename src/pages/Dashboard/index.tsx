@@ -9,6 +9,7 @@ import api from '../../services/api';
 import { isToday, format, isAfter } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
 import { parseISO } from 'date-fns/esm';
+import { Link } from 'react-router-dom';
 
 interface MonthAvailability {
     day: number;
@@ -124,7 +125,7 @@ const Dashboard: React.FC = () => {
                         <img src={user.avatar_url} alt={user.name}></img>
                         <div>
                             <span>Bem-vindo</span>
-                            <strong>{user.name}</strong>
+                            <Link to="/profile"><strong>{user.name}</strong></Link>
                         </div>
                     </Profile>
                     <button type="button" onClick={signOut}>
